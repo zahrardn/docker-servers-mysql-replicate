@@ -1,0 +1,3 @@
+# in mysql
+stop slave;
+reset slave all;

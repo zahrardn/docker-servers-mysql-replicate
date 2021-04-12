@@ -1,0 +1,14 @@
+This replication script use on beloww situation:
+
+- use My SQL database version 5.7
+- use mysql on a container that config files are volumes
+
+Usage:
+
+A) On master db server:
+1- set variables on env file according to your project
+2- run "bash run-master.sh"
+
+A) On slave db server:
+1- set variables on env file according to your project
+2- run "bash run-slave.sh"

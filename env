@@ -1,30 +1,31 @@
 #server ip
-#IP=127.0.0.1
+IP=127.0.0.1
 
 # db port that can access to mysql
 PORT=3308
 
 # database name that u wanna set replicate 
-DB_NAME=crm_develop
+DB_NAME=production
 
-# database root password
-ROOT_PASS="root"
+# database admin user password
+ADMIN_USER=admin
+ADMIN_PASS="admin"
 
 # this password set for a new user that create for replication
 REPLICATE_USER=rep_user
-REPLICATE_USER_PASS=password
+REPLICATE_USER_PASS=padd
 
 # find it from "docker ps" command in terminal
 DB_CONTAINER_NAME=tcrm_db
 
 # /etc/mysql/my.cnf volume path in container
-MYSQL_CONFIG_FILE_PATH=/home/projects/start/docker-compose/mysql/db.conf
+MYSQL_CONFIG_FILE_PATH=/home/projects/tcrm_start/docker-compose/mysql/db.conf
 
 # /etc/mysql/mysql.conf.d/mysqld.cnf volume path in container
-MYSQL_D_CONFIG_FILE_PATH=/home/projects/start/docker-compose/mysql/mysqld.cnf
+MYSQL_D_CONFIG_FILE_PATH=/home/projects/tcrm_start/docker-compose/mysql/mysqld.cnf
 
 
 # set from master ( to run slave script )
-    CURRENT_LOG=mysql-bin.000004
+    CURRENT_LOG=mysql-bin.000001
 
-    CURRENT_POS=154
+    CURRENT_POS=9930758

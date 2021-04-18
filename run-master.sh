@@ -11,7 +11,7 @@ then
 fi
 
 echo "check db connection..."
-until docker exec $DB_CONTAINER_NAME sh -c 'export MYSQL_PWD='$ROOT_PASS'; mysql -u root -e ";"'
+until docker exec $DB_CONTAINER_NAME sh -c 'export MYSQL_PWD='$ADMIN_PASS'; mysql -u '$ADMIN_USER' -e ";"'
 do
     echo "Waiting for $DB_CONTAINER_NAME database connection..."
     sleep 4
@@ -32,10 +32,10 @@ echo "restart docker container..."
 
 echo "create replicate user with replicate grant..."
 priv_stmt='GRANT REPLICATION SLAVE ON *.* TO "'$REPLICATE_USER'"@"%" IDENTIFIED BY "'$REPLICATE_USER_PASS'"; FLUSH PRIVILEGES;'
-docker exec $DB_CONTAINER_NAME sh -c "export MYSQL_PWD="$ROOT_PASS"; mysql -u root -e '$priv_stmt'"
+docker exec $DB_CONTAINER_NAME sh -c "export MYSQL_PWD="$ADMIN_PASS"; mysql -u "$ADMIN_USER" -e '$priv_stmt'"
 
 echo "get log and pos from output..."
-MS_STATUS=`docker exec $DB_CONTAINER_NAME sh -c 'export MYSQL_PWD='$ROOT_PASS'; mysql -u root -e "SHOW MASTER STATUS"'`
+MS_STATUS=`docker exec $DB_CONTAINER_NAME sh -c 'export MYSQL_PWD='$ADMIN_PASS'; mysql -u '$ADMIN_USER' -e "SHOW MASTER STATUS"'`
 
 CURRENT_LOG=`echo $MS_STATUS | awk '{print $6}'`
 CURRENT_POS=`echo $MS_STATUS | awk '{print $7}'`
